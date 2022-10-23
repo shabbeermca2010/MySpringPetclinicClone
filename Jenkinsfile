@@ -6,15 +6,15 @@ pipeline
 		{
         		cron('* 18 * * 1-5')
              	}
-           post
-            {
-            always
-            {
-               echo 'this is qa branch'
-                   
-                }
-            
+           
+           stages {
+        stage('vcs') {
+                        steps {
+                                 echo 'this is main branch'
+                             }
+                     }
+        
             }
-    
+           
         }
     
