@@ -8,11 +8,7 @@ pipeline
         				cron('* 18 * * 1-5')
              		}
     stages {
-        		stage('vcs') {  
-            				steps {
-                						git branch: "qa", url: 'https://github.com/shabbeermca2010/MySpringPetclinicClone'
-            						}
-            
+        		
         						}
          stage ('Artifactory configuration') {
              				steps{             
