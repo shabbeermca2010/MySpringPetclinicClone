@@ -13,9 +13,9 @@ pipeline
          stage ('Artifactory configuration') {
              				steps{      
                                         cd C://ProgramData/Jenkins/.jenkins/jobs/sample multibranch/branches/dev/workspace/target
-              					        junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
-                     					archiveArtifacts 'target/*.jar'
-            
+              					        junit '**/target/surefire-reports/TEST-*.xml'
+                                                        archiveArtifacts 'target/*.jar'
+                   
                 				}
         
                 
