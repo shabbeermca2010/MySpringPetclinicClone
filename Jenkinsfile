@@ -10,13 +10,13 @@ pipeline
     stages {
         		stage('vcs') {  
             				steps {
-                						git branch: "qa", url: 'https://github.com/GitPracticeRepo/MySpringPetclinicClone.git'
+                						git branch: "qa", url: 'https://github.com/shabbeermca2010/MySpringPetclinicClone'
             						}
             
         						}
          stage ('Artifactory configuration') {
              				steps{             
-              							junit '**/target/surefire-reports/TEST-*.xml'
+              					        junit '**/target/surefire-reports/TEST-*.xml'
                      					archiveArtifacts 'target/*.jar'
             
                 				}
