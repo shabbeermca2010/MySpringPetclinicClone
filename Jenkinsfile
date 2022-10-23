@@ -12,7 +12,7 @@ pipeline
         						
          stage ('Artifactory configuration') {
              				steps{             
-              					        junit '**/target/surefire-reports/TEST-*.xml'
+              					        junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
                      					archiveArtifacts 'target/*.jar'
             
                 				}
