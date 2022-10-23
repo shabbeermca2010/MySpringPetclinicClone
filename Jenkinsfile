@@ -1,34 +1,27 @@
-pipeline {
+pipeline 
+
+   {
     agent any
-    triggers {
-        cron('* 18 * * 1-5')
-    }
+
+    triggers 
+					{
+        				cron('* 18 * * 1-5')
+             		}
     stages {
-        stage('vcs') {
-            steps {
-                git branch: "qa", url: 'https://github.com/GitPracticeRepo/MySpringPetclinicClone.git'
-            }
+        		stage('vcs') {  
+            				steps {
+                						git branch: "qa", url: 'https://github.com/GitPracticeRepo/MySpringPetclinicClone.git'
+            						}
             
-        }
+        						}
          stage ('Artifactory configuration') {
-            steps {
-                rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "JFROG_OCT22",
-                    releaseRepo: 'qt-libs-release-local',
-                    snapshotRepo: 'qt-libs-snapshot-local'
-                )
-            }
-        }
-        stage ('Exec Maven') {
-            steps {
-                rtMavenRun (
-                    tool: 'MVN_DEFAULT', // Tool name from Jenkins configuration
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: "MAVEN_DEPLOYER"
-                )
-            }
+             				steps{             
+              							junit '**/target/surefire-reports/TEST-*.xml'
+                     					archiveArtifacts 'target/*.jar'
+            
+                				}
+        
+                
+            										}
         }
     }
-}
