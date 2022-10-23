@@ -1,40 +1,24 @@
-pipeline {
+pipeline 
+
+   {
     agent any
-    triggers {
-        pollSCM('* * * * *')
-    }
+
+    triggers 
+					{
+        				cron('* 18 * * 1-5')
+             		}
     stages {
-        stage('vcs') {
-            steps {
-                git branch: "dev", url: 'https://github.com/GitPracticeRepo/MySpringPetclinicClone.git'
-            }
-
-        }
+     
+        						
          stage ('Artifactory configuration') {
-            steps {
-
-
-                rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "JFROG_OCT22",
-                    releaseRepo: 'qt-libs-release-local',
-                    snapshotRepo: 'qt-libs-snapshot-local'
-                )
-
-
-            }
+             				steps{      
+                                        cd C:\ProgramData\Jenkins\.jenkins\jobs\sample multibranch\branches\dev\workspace\target
+              					        junit allowEmptyResults: true, testResults: '**/test-results/*.xml'
+                     					archiveArtifacts 'target/*.jar'
+            
+                				}
+        
+                
+            				}
         }
-        stage ('Exec Maven') {
-            steps {
-                rtMavenRun (
-                    tool: 'MVN_DEFAULT', // Tool name from Jenkins configuration
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: "MAVEN_DEPLOYER"
-                )
-            }
-        }
-
     }
-
-}
