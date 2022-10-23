@@ -9,7 +9,7 @@ pipeline
              		}
     stages {
         		
-        						}
+        						
          stage ('Artifactory configuration') {
              				steps{             
               					        junit '**/target/surefire-reports/TEST-*.xml'
@@ -18,6 +18,6 @@ pipeline
                 				}
         
                 
-            										}
+            				}
         }
     }
